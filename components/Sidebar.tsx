@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Animated, Easing, Platform, Pressable, useColorScheme, useWindowDimensions, TextStyle, ScrollView } from 'react-native';
+import { View, StyleSheet, Animated, Easing, Platform, Pressable, useColorScheme, useWindowDimensions, TextStyle, ScrollView, Image, ImageStyle, ViewStyle } from 'react-native';
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
 import { HoverableView } from './HoverableView';
@@ -137,12 +137,11 @@ export const Sidebar = ({ onNavigate, currentPath = '/dash', onToggle }: Sidebar
   const themeColors = COLORS[currentTheme as keyof typeof COLORS];
 
   const menuItems = [
-    { icon: 'LayoutDashboard', label: 'Dashboard', route: '/dash', canNavigate: true },
-    { icon: 'RotateCw', label: 'Transações', route: '/transactions', canNavigate: false },
-    { icon: 'Wallet', label: 'Carteira', route: '/wallet', canNavigate: false },
-    { icon: 'Target', label: 'Objetivos', route: '/goals', canNavigate: false },
-    { icon: 'CircleDollarSign', label: 'Orçamento', route: '/budget', canNavigate: false },
-    { icon: 'LineChart', label: 'Análises', route: '/analytics', canNavigate: false },
+    { icon: 'LineChart', label: 'BI Servidores', route: '/dash', canNavigate: true },
+    { icon: 'Server', label: 'Base de Dados', route: '/transactions', canNavigate: false },
+    { icon: 'Vote', label: 'Eleições MS', route: '/wallet', canNavigate: false },
+    { icon: 'Phone', label: 'Agenda Telefônica', route: '/goals', canNavigate: false },
+    { icon: 'Headphones', label: 'Suporte do Sistema', route: '/budget', canNavigate: false },
     { icon: 'Settings', label: 'Configurações', route: '/config', canNavigate: true }
   ];
 
@@ -175,13 +174,29 @@ export const Sidebar = ({ onNavigate, currentPath = '/dash', onToggle }: Sidebar
           <ThemedView style={[styles.header, { backgroundColor: 'transparent' }]}>
             <View style={[
               styles.logoContainer,
-              { backgroundColor: themeColors.primary }
+              { backgroundColor: 'transparent' }
             ]}>
-              <ThemedText style={[
-                styles.logoText,
-                typography.title,
-                { fontSize: (typography.title?.fontSize || 24) * 0.8 }
-              ]} type="title">A</ThemedText>
+              {isExpanded ? (
+                <Image 
+                  source={require('../assets/images/gov-ms.png')}
+                  style={{
+                    width: EXPANDED_WIDTH,
+                    height: 45,
+                    marginLeft: -SPACING.sm,
+                  }}
+                  resizeMode="contain"
+                />
+              ) : (
+                <Image 
+                  source={require('../assets/images/gov-ms.png')}
+                  style={{
+                    width: COLLAPSED_WIDTH,
+                    height: 45,
+                    marginLeft: -SPACING.sm,
+                  }}
+                  resizeMode="contain"
+                />
+              )}
             </View>
             <Animated.View style={{
               opacity: fadeAnim,
@@ -191,9 +206,7 @@ export const Sidebar = ({ onNavigate, currentPath = '/dash', onToggle }: Sidebar
               })}]
             }}>
               {isExpanded && (
-                <ThemedText type="subtitle" style={[styles.brandText, typography.subtitle]}>
-                  Aicrus Tech
-                </ThemedText>
+                <View style={{ width: 100, height: 20 } as ViewStyle} />
               )}
             </Animated.View>
             <HoverableView
@@ -350,7 +363,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    paddingHorizontal: SPACING.md,
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: SPACING.xl,
@@ -379,17 +391,23 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   logoContainer: {
-    width: 36,
-    height: 36,
-    borderRadius: BORDER_RADIUS.lg,
-    alignItems: 'center',
+    flex: 1,
+    width: '100%',
+    alignItems: 'flex-start',
     justifyContent: 'center',
     ...Platform.select({
       web: {
         transition: 'all 0.3s ease',
-      },
+      } as ViewStyle,
     }),
-  },
+  } as ViewStyle,
+  logoImage: {
+    ...Platform.select({
+      web: {
+        transition: 'all 0.3s ease',
+      } as ImageStyle,
+    }),
+  } as ImageStyle,
   logoText: {
     color: 'white',
   },
