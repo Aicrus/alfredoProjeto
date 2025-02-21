@@ -1,6 +1,7 @@
-import { Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { useWindowDimensions } from 'react-native';
 import { BREAKPOINTS } from '@/constants/DesignSystem';
+import { useTheme } from '@/hooks/ThemeContext';
 
 type AuthImageProps = {
   type: 'login' | 'register';
@@ -8,27 +9,40 @@ type AuthImageProps = {
 
 export function AuthImage({ type }: AuthImageProps) {
   const { width } = useWindowDimensions();
+  const { currentTheme } = useTheme();
   const isDesktopOrTablet = width >= BREAKPOINTS.tablet;
 
   if (!isDesktopOrTablet) {
     return null;
   }
 
-  // Aqui você muda a imagem de login
-  const loginImage = 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=1920&auto=format&fit=crop';
-
-  // Aqui você muda a imagem de cadastro
-  const registerImage = 'https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=1920&auto=format&fit=crop';
-
   return (
-    <Image
-      source={{ uri: type === 'login' ? loginImage : registerImage }}
-      style={{
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-      }}
-      resizeMode="cover"
-    />
+    <View style={[
+      styles.container,
+      { backgroundColor: '#003366' } // Azul escuro institucional
+    ]}>
+      <Image
+        source={require('../assets/images/brasao-ms.png')}
+        style={styles.image}
+        resizeMode="cover"
+      />
+    </View>
   );
-} 
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  image: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+  }
+}); 
