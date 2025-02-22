@@ -67,13 +67,13 @@ export function PageContainer({ children, style }: PageContainerProps) {
 
         // SUPERIOR E INFERIOR BASE - Ajuste aqui o padding vertical base para cada breakpoint
         // Mobile: SPACING.md (16px) | Tablet: SPACING.xl (24px) | Desktop: SPACING.xxl (32px)
-        paddingVertical: isMobile ? SPACING.md : isTablet ? SPACING.xl : SPACING.xxl,
+        paddingVertical: isMobile ? SPACING.md : isTablet ? SPACING.xl : SPACING.xl,
 
         // SUPERIOR ESPECÍFICO - Ajuste aqui o padding superior específico
         // Web (Mobile/Tablet/Desktop) - Responsivo
         // Mobile Nativo - Valor fixo para status bar
         paddingTop: Platform.select({
-          web: isMobile ? SPACING.xl : isTablet ? SPACING.xl : SPACING.xxl,
+          web: isMobile ? SPACING.xl : isTablet ? SPACING.xl : SPACING.xl,
           default: 50 // Mobile nativo: fixo para status bar
         }),
 

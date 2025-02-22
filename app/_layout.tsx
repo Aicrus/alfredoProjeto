@@ -15,6 +15,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { AuthProvider } from '@/contexts/auth';
 import { useAuth } from '@/contexts/auth';
 import { COLORS } from '@/constants/DesignSystem';
+import { SidebarProvider } from '@/hooks/SidebarContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -56,13 +57,11 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <ThemeProvider>
         <ToastProvider>
-          {!fontsLoaded ? (
-            <LoadingScreen />
-          ) : (
+          <SidebarProvider>
             <AuthProvider>
               <RootLayoutNav />
             </AuthProvider>
-          )}
+          </SidebarProvider>
         </ToastProvider>
       </ThemeProvider>
     </SafeAreaProvider>

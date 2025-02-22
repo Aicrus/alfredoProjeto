@@ -18,7 +18,7 @@ export function HoverableView({
   isActive,
   activeBackgroundColor,
   style,
-  hoverScale = 1.005,
+  hoverScale = 1.002,
   hoverTranslateX = 0,
   disableHoverBackground = false,
   ...props
@@ -47,7 +47,8 @@ export function HoverableView({
         Platform.select({
           web: {
             cursor: 'pointer',
-            transition: 'all 0.2s ease',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            boxShadow: isHovered && !isActive ? `0 0 0 1px ${COLORS[currentTheme].primary}15` : 'none',
           },
         }),
       ]}

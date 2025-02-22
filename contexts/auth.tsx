@@ -114,7 +114,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (shouldBeInAuth && !inAuthGroup) {
       router.replace('/(auth)/login');
     } else if (!shouldBeInAuth && inAuthGroup) {
-      router.replace('/(tabs)/dash');
+      router.replace('/(tabs)/home');
     }
   }, [isInitialized, isLoading, session, segments]);
 
@@ -336,7 +336,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
       setTimeout(() => {
-        router.replace('/(tabs)/dash');
+        router.replace('/(tabs)/home');
       }, 100);
 
     } catch (error) {

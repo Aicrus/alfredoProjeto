@@ -87,7 +87,7 @@ export default function TabsLayout() {
         }}
       >
         <Tabs.Screen
-          name="dash"
+          name="home"
           options={{
             title: 'Dashboard',
             tabBarIcon: ({ color }) => <LayoutDashboard size={ICONS.sizes.md} color={color} strokeWidth={1.5} />,

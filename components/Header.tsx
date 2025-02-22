@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Platform, Pressable, Animated, Image } from 'react-native';
-import { Bell, Search } from 'lucide-react-native';
+import { Bell, Search, Menu } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemedView } from './ThemedView';
 import { ThemedText } from './ThemedText';
@@ -16,6 +16,8 @@ interface HeaderProps {
   sidebarWidth: Animated.Value;
   onNavigate?: (route: string) => void;
   currentPath?: string;
+  onToggleSidebar?: () => void;
+  isSidebarExpanded?: boolean;
 }
 
 const pastelColors = [
@@ -41,7 +43,13 @@ const getStorage = () => {
   };
 };
 
-export function Header({ sidebarWidth, onNavigate, currentPath = '/dash' }: HeaderProps) {
+export function Header({ 
+  sidebarWidth, 
+  onNavigate, 
+  currentPath = '/home',
+  onToggleSidebar,
+  isSidebarExpanded = true
+}: HeaderProps) {
   const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
   const [isNotificationsMenuVisible, setIsNotificationsMenuVisible] = useState(false);
   const [userAvatarColor, setUserAvatarColor] = useState<string>(pastelColors[0]);
@@ -84,10 +92,10 @@ export function Header({ sidebarWidth, onNavigate, currentPath = '/dash' }: Head
         return 'Configurações';
       case '/design-system':
         return 'Design System';
-      case '/dash':
-        return 'Dashboard';
+      case '/home':
+        return 'Home';
       default:
-        return 'Dashboard';
+        return 'Home';
     }
   };
 
@@ -105,11 +113,41 @@ export function Header({ sidebarWidth, onNavigate, currentPath = '/dash' }: Head
     >
       <View style={styles.content}>
         <View style={styles.leftContent}>
+          {!isMobile && onToggleSidebar && (
+            <Pressable
+              style={({ pressed, hovered }) => [
+                styles.iconButton,
+                { 
+                  backgroundColor: currentTheme === 'dark' ? '#222' : themeColors.primaryBackground,
+                  marginRight: SPACING.md,
+                  width: 40,
+                  height: 40,
+                  borderRadius: BORDER_RADIUS.pill,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transform: [{ scale: pressed ? 0.95 : hovered ? 1.02 : 1 }],
+                  cursor: 'pointer'
+                }
+              ]}
+              onPress={onToggleSidebar}
+            >
+              <Menu 
+                size={20} 
+                color={themeColors.icon} 
+                strokeWidth={1.5}
+              />
+            </Pressable>
+          )}
           <ThemedText 
-            type="subtitle" 
+            type="labelSmall" 
             style={[
               styles.pageTitle,
-              { fontWeight: '600' }
+              { 
+                color: '#57636C',
+                fontFamily: 'Inter_600SemiBold',
+                fontSize: 16,
+                lineHeight: 24
+              }
             ]}
           >
             {getPageTitle(currentPath)}
@@ -230,8 +268,6 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   pageTitle: {
-    fontSize: 18,
-    letterSpacing: -0.5,
     ...Platform.select({
       web: {
         userSelect: 'none',

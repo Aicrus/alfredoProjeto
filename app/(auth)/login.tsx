@@ -69,7 +69,7 @@ export default function Login() {
     <ThemedView 
       style={[
         styles.container, 
-        { backgroundColor: COLORS[currentTheme].secondaryBackground }
+        { backgroundColor: COLORS[currentTheme].primaryBackground }
       ]} 
       onTouchStart={handlePressOutside}
     >

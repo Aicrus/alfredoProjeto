@@ -6,7 +6,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemeSelector } from '@/components/ThemeSelector';
 import { useTheme } from '@/hooks/ThemeContext';
 import { FeedbackMessage } from '@/components/FeedbackMessage';
-import { Sidebar } from '@/components/Sidebar';
+import Sidebar2 from '@/components/Sidebar2';
 import { COLORS, FEEDBACK_COLORS, SPACING, SHADOWS, ICONS, BORDER_RADIUS, BREAKPOINTS } from '@/constants/DesignSystem';
 import { Home, Search, User } from 'lucide-react-native';
 import { useToast } from '@/hooks/useToast';
@@ -91,13 +91,13 @@ export default function DesignSystemScreen() {
   );
 
   return (
-    <ThemedView style={[styles.container, { backgroundColor: COLORS[currentTheme].primaryBackground }]}>
+    <ThemedView style={[styles.container, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
       <Header 
         sidebarWidth={sidebarWidth}
         currentPath="/design-system"
       />
       <ScrollView
-        style={[styles.scrollView, { backgroundColor: COLORS[currentTheme].primaryBackground }]}
+        style={[styles.scrollView, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}
         contentContainerStyle={[
           styles.scrollContent,
           { paddingTop: 80 }
@@ -105,18 +105,18 @@ export default function DesignSystemScreen() {
         showsVerticalScrollIndicator={false}>
         <PageContainer>
           {/* Guia de Cores */}
-          <ThemedView style={styles.section}>
+          <ThemedView style={[styles.section, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
             <SectionTitle>Guia de Cores</SectionTitle>
             <ThemedText style={styles.sectionDescription}>
               Cores principais do sistema que definem a identidade visual da aplicação
             </ThemedText>
 
-            <ThemedView style={styles.colorSection}>
+            <ThemedView style={[styles.colorSection, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
               <ThemedText type="defaultSemiBold" style={styles.colorSectionTitle}>Cores da Marca</ThemedText>
               <ThemedText style={styles.colorSectionDescription}>
                 Cores principais que definem a identidade visual da marca
               </ThemedText>
-              <View style={styles.colorsGrid}>
+              <View style={[styles.colorsGrid, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
                 <ColorBox color={COLORS[currentTheme].primary} name="Primary" />
                 <ColorBox color={COLORS[currentTheme].secondary} name="Secondary" />
                 <ColorBox color={COLORS[currentTheme].tertiary} name="Tertiary" />
@@ -124,12 +124,12 @@ export default function DesignSystemScreen() {
               </View>
             </ThemedView>
 
-            <ThemedView style={styles.colorSection}>
+            <ThemedView style={[styles.colorSection, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
               <ThemedText type="defaultSemiBold" style={styles.colorSectionTitle}>Cores Utilitárias</ThemedText>
               <ThemedText style={styles.colorSectionDescription}>
                 Cores fundamentais para textos e fundos da aplicação
               </ThemedText>
-              <View style={styles.colorsGrid}>
+              <View style={[styles.colorsGrid, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
                 <ColorBox color={COLORS[currentTheme].primaryText} name="Primary Text" />
                 <ColorBox color={COLORS[currentTheme].secondaryText} name="Secondary Text" />
                 <ColorBox color={COLORS[currentTheme].primaryBackground} name="Primary Background" />
@@ -137,12 +137,12 @@ export default function DesignSystemScreen() {
               </View>
             </ThemedView>
 
-            <ThemedView style={styles.colorSection}>
+            <ThemedView style={[styles.colorSection, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
               <ThemedText type="defaultSemiBold" style={styles.colorSectionTitle}>Cores do Sistema</ThemedText>
               <ThemedText style={styles.colorSectionDescription}>
                 Cores utilizadas em elementos de interface e interação
               </ThemedText>
-              <View style={styles.colorsGrid}>
+              <View style={[styles.colorsGrid, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
                 <ColorBox color={COLORS[currentTheme].icon} name="Icon" />
                 <ColorBox color={COLORS[currentTheme].tabIconDefault} name="Tab Icon Default" />
                 <ColorBox color={COLORS[currentTheme].tabIconSelected} name="Tab Icon Selected" />
@@ -157,13 +157,13 @@ export default function DesignSystemScreen() {
           </ThemedView>
 
           {/* Tipografia */}
-          <ThemedView style={[styles.section, styles.typographySection]}>
+          <ThemedView style={[styles.section, styles.typographySection, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
             <SectionTitle>Tipografia</SectionTitle>
             <ThemedText style={styles.sectionDescription}>
               Sistema de textos responsivo que se adapta ao tamanho da tela, utilizando a fonte Inter
             </ThemedText>
             
-            <ThemedView style={[styles.typographyContainer, SHADOWS[currentTheme].sm]}>
+            <ThemedView style={[styles.typographyContainer, SHADOWS[currentTheme].sm, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
               {/* Display */}
               <ThemedText type="subtitle" style={styles.typographyGroupTitle}>Display</ThemedText>
               <View style={styles.typographyItem}>
@@ -268,7 +268,7 @@ export default function DesignSystemScreen() {
           </ThemedView>
 
           {/* Breakpoints */}
-          <ThemedView style={styles.section}>
+          <ThemedView style={[styles.section, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
             <SectionTitle>Breakpoints</SectionTitle>
             <ThemedText style={styles.sectionDescription}>
               Pontos de quebra que definem a adaptação do layout em diferentes tamanhos de tela
@@ -308,7 +308,7 @@ export default function DesignSystemScreen() {
           </ThemedView>
 
           {/* Feedback Visual */}
-          <ThemedView style={[styles.section, { marginVertical: SPACING.xxl }]}>
+          <ThemedView style={[styles.section, { marginVertical: SPACING.xxl, backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
             <SectionTitle>Feedback Visual</SectionTitle>
             <ThemedText style={styles.sectionDescription}>
               Mensagens e alertas para comunicação com o usuário
@@ -341,7 +341,7 @@ export default function DesignSystemScreen() {
           </ThemedView>
 
           {/* Espaçamento */}
-          <ThemedView style={styles.section}>
+          <ThemedView style={[styles.section, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
             <SectionTitle>Sistema de Espaçamento</SectionTitle>
             <ThemedText style={styles.sectionDescription}>
               Escala de espaçamentos para manter consistência no layout
@@ -354,7 +354,7 @@ export default function DesignSystemScreen() {
           </ThemedView>
 
           {/* Sombras */}
-          <ThemedView style={[styles.section, { marginVertical: SPACING.xxl }]}>
+          <ThemedView style={[styles.section, { marginVertical: SPACING.xxl, backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
             <SectionTitle>Sistema de Elevação</SectionTitle>
             <ThemedText style={styles.sectionDescription}>
               Sombras para criar hierarquia visual e profundidade
@@ -455,7 +455,7 @@ export default function DesignSystemScreen() {
           </ThemedView>
 
           {/* Componentes */}
-          <ThemedView style={styles.section}>
+          <ThemedView style={[styles.section, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
             <SectionTitle>Biblioteca de Componentes</SectionTitle>
             <ThemedText style={styles.sectionDescription}>
               Componentes reutilizáveis que seguem o design system
@@ -472,7 +472,7 @@ export default function DesignSystemScreen() {
                   borderColor: COLORS[currentTheme].divider
                 }
               ]}>
-                <Sidebar onNavigate={(route) => console.log('Demo:', route)} />
+                <Sidebar2 onNavigate={(route) => console.log('Demo:', route)} />
               </ThemedView>
             </ComponentShowcase>
 
@@ -640,7 +640,7 @@ const styles = StyleSheet.create({
     padding: 20,
     gap: 12,
     borderRadius: 12,
-    backgroundColor: COLORS.light.primaryBackground + '10',
+    backgroundColor: COLORS.light.secondaryBackground,
     alignItems: 'center',
   },
   demoThemedView: {
@@ -648,7 +648,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     width: '100%',
-    backgroundColor: COLORS.light.primaryBackground + '10',
+    backgroundColor: COLORS.light.secondaryBackground,
   },
   iconGrid: {
     flexDirection: 'row',

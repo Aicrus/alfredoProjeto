@@ -181,7 +181,7 @@ export default function Register() {
     <ThemedView 
       style={[
         styles.container, 
-        { backgroundColor: COLORS[currentTheme].secondaryBackground }
+        { backgroundColor: COLORS[currentTheme].primaryBackground }
       ]} 
       onTouchStart={handlePressOutside}
     >

@@ -19,8 +19,8 @@ export const COLORS = {
     // Utility Colors - Cores utilitárias para texto e fundo
     primaryText: '#14181B',    // Cinza escuro para boa legibilidade
     secondaryText: '#57636C',  // Cinza médio suave
-    primaryBackground: '#F7F8FA',   // Branco quase puro
-    secondaryBackground: '#FFFFFF', // Branco puro
+    primaryBackground: '#FFFFFF',   // Branco puro
+    secondaryBackground: '#F1F4F8', // Cinza claro para fundo
 
     // System Colors - Cores do sistema
     icon: '#57636C',           // Cinza neutro
@@ -28,26 +28,50 @@ export const COLORS = {
     tabIconSelected: '#4A6FA5',// Mesmo azul da cor primária
     divider: '#E0E3E7',        // Cinza claro suave
     hover: '#00000008',        // Hover suave
+
+    // Accent Colors - Cores de destaque
+    accent1: '#2E5C87',
+    accent2: '#39B6D2',
+    accent3: '#D3545D',
+    accent4: '#E0E3E7',
+
+    // Feedback Colors - Cores para mensagens e alertas
+    success: '#4CAF50',
+    info: '#2196F3',
+    warning: '#FFC107',
+    error: '#F44336',
   },
   dark: {
     // Brand Colors - Cores principais da marca no tema escuro
     primary: '#4A6FA5',    // Azul sofisticado
-    secondary: '#2C3E50',  // Azul acinzentado moderno
+    secondary: '#22D3EE',  // Azul claro moderno
     tertiary: '#D3545D',   // Vermelho refinado
-    alternate: '#262D34',  // Cinza escuro clássico
+    alternate: '#2E3A48',  // Cinza escuro clássico
 
     // Utility Colors - Cores utilitárias adaptadas para o tema escuro
     primaryText: '#FFFFFF',    // Branco puro
     secondaryText: '#95A1AC',  // Cinza claro para legibilidade
-    primaryBackground: '#1C1E26',   // Cinza bem escuro, não preto puro
-    secondaryBackground: '#14181B', // Cinza quase preto
+    primaryBackground: '#14181B',   // Cinza quase preto
+    secondaryBackground: '#1D2428', // Cinza bem escuro, não preto puro
 
     // System Colors - Cores do sistema adaptadas para o tema escuro
     icon: '#95A1AC',           // Cinza neutro
     tabIconDefault: '#95A1AC', // Mesmo tom do ícone
     tabIconSelected: '#4A6FA5',// Mesmo azul da cor primária
-    divider: '#262D34',        // Cinza escuro clássico
+    divider: '#2E3A48',        // Cinza escuro clássico
     hover: '#FFFFFF08',        // Hover suave
+
+    // Accent Colors - Cores de destaque
+    accent1: '#2E5C87',
+    accent2: '#39B6D2',
+    accent3: '#D3545D',
+    accent4: '#2E3A48',
+
+    // Feedback Colors - Cores para mensagens e alertas
+    success: '#4CAF50',
+    info: '#2196F3',
+    warning: '#FFC107',
+    error: '#F44336',
   },
 } as const;
 
@@ -182,18 +206,21 @@ export const TYPOGRAPHY: {
       lineHeight: 20,
       fontWeight: '400',
       fontFamily: 'Inter_400Regular',
+      letterSpacing: 0.1,
     },
     bodySemiBold: {
       fontSize: 14,
       lineHeight: 20,
       fontWeight: '600',
       fontFamily: 'Inter_600SemiBold',
+      letterSpacing: 0.1,
     },
     small: {
       fontSize: 12,
       lineHeight: 16,
       fontWeight: '400',
       fontFamily: 'Inter_400Regular',
+      letterSpacing: 0.1,
     },
     link: {
       fontSize: 14,
@@ -280,18 +307,21 @@ export const TYPOGRAPHY: {
       lineHeight: 24,
       fontWeight: '400',
       fontFamily: 'Inter_400Regular',
+      letterSpacing: 0.1,
     },
     bodySemiBold: {
       fontSize: 16,
       lineHeight: 24,
       fontWeight: '600',
       fontFamily: 'Inter_600SemiBold',
+      letterSpacing: 0.1,
     },
     small: {
       fontSize: 14,
       lineHeight: 20,
       fontWeight: '400',
       fontFamily: 'Inter_400Regular',
+      letterSpacing: 0.1,
     },
     link: {
       fontSize: 16,
@@ -378,18 +408,21 @@ export const TYPOGRAPHY: {
       lineHeight: 24,
       fontWeight: '400',
       fontFamily: 'Inter_400Regular',
+      letterSpacing: 0.1,
     },
     bodySemiBold: {
       fontSize: 16,
       lineHeight: 24,
       fontWeight: '600',
       fontFamily: 'Inter_600SemiBold',
+      letterSpacing: 0.1,
     },
     small: {
       fontSize: 14,
       lineHeight: 20,
       fontWeight: '400',
       fontFamily: 'Inter_400Regular',
+      letterSpacing: 0.1,
     },
     link: {
       fontSize: 16,
