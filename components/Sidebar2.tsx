@@ -5,13 +5,15 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  Platform
+  Platform,
+  TouchableOpacity
 } from 'react-native';
 import { useTheme } from '@/hooks/ThemeContext';
 import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '@/constants/DesignSystem';
-import { LineChart, Database, Vote, Phone, Headphones, Settings, ChevronDown } from 'lucide-react-native';
+import { LineChart, Database, Vote, Phone, Headphones, Settings, ChevronDown, Crown } from 'lucide-react-native';
 import { HoverableView } from './HoverableView';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Link, useRouter } from 'expo-router';
 
 type Theme = 'light' | 'dark';
 
@@ -19,7 +21,10 @@ interface MenuItem {
   title: string;
   icon: string;
   route?: string;
-  subItems?: string[];
+  subItems?: Array<{
+    title: string;
+    route: '/home' | '/prefeito' | '/config' | '/apoiadores' | '/liderancas' | '/coordenadores' | '/assessores' | '/vereadores' | '/deputados-estaduais' | '/deputados-federais' | '/agenda' | '/suporte';
+  }>;
 }
 
 type ExpandedMenus = {
@@ -39,16 +44,17 @@ export default function Sidebar2({
   onToggle,
   isExpanded = true 
 }: Sidebar2Props) {
+  const router = useRouter();
   const { currentTheme } = useTheme() as { currentTheme: Theme };
   const [expandedMenus, setExpandedMenus] = React.useState<ExpandedMenus>({
     'Base de Dados': false,
-    'Eleições MS': false
+    'Eleições MS': currentPath === '/prefeito'
   });
 
   useEffect(() => {
     setExpandedMenus({
       'Base de Dados': false,
-      'Eleições MS': false
+      'Eleições MS': currentPath === '/prefeito'
     });
   }, [currentPath]);
 
@@ -66,6 +72,16 @@ export default function Sidebar2({
         'Eleições MS': false,
         [title]: !prev[title]
       }));
+    }
+  };
+
+  const handleSubItemPress = (route: string) => {
+    console.log('handleSubItemPress chamado com rota:', route);
+    try {
+      router.push(route as any);
+      console.log('Navegação executada com sucesso para:', route);
+    } catch (error) {
+      console.error('Erro ao navegar:', error);
     }
   };
 
@@ -97,12 +113,22 @@ export default function Sidebar2({
     {
       title: 'Base de Dados',
       icon: 'Database',
-      subItems: ['Apoiadores', 'Lideranças', 'Coordenadores', 'Assesssores']
+      subItems: [
+        { title: 'Apoiadores', route: '/apoiadores' },
+        { title: 'Lideranças', route: '/liderancas' },
+        { title: 'Coordenadores', route: '/coordenadores' },
+        { title: 'Assesssores', route: '/assessores' }
+      ]
     },
     {
       title: 'Eleições MS',
       icon: 'Vote',
-      subItems: ['Prefeito', 'Vereadores', 'Deputados Estaduais', 'Deputados Federais']
+      subItems: [
+        { title: 'Prefeitos', route: '/prefeito' },
+        { title: 'Vereadores', route: '/vereadores' },
+        { title: 'Deputados Estaduais', route: '/deputados-estaduais' },
+        { title: 'Deputados Federais', route: '/deputados-federais' }
+      ]
     },
     {
       title: 'Agenda Telefônica',
@@ -121,17 +147,18 @@ export default function Sidebar2({
     }
   ];
 
+  const handleLogoPress = () => {
+    if (onNavigate) {
+      onNavigate('/home');
+    }
+  };
+
   return (
     <View style={[
       styles.sidebarContainer,
       { 
         backgroundColor: COLORS[currentTheme].primaryBackground,
         width: isExpanded ? 220 : 70,
-        ...(Platform.OS === 'web' ? {
-          WebkitTransition: `width ${isExpanded ? '0.03s' : '0.15s'} cubic-bezier(0.25, 0.1, 0.25, 1)`,
-          MozTransition: `width ${isExpanded ? '0.03s' : '0.15s'} cubic-bezier(0.25, 0.1, 0.25, 1)`,
-          msTransition: `width ${isExpanded ? '0.03s' : '0.15s'} cubic-bezier(0.25, 0.1, 0.25, 1)`,
-        } : {})
       }
     ]}>
       {/* Linha divisória vertical */}
@@ -144,13 +171,17 @@ export default function Sidebar2({
         styles.headerContainer,
         { borderBottomColor: COLORS[currentTheme].divider }
       ]}>
-        <View style={styles.logoContainer}>
+        <TouchableOpacity 
+          style={styles.logoContainer}
+          onPress={handleLogoPress}
+          activeOpacity={0.7}
+        >
           <Image 
             source={isExpanded ? require('@/assets/images/gov-ms.png') : require('@/assets/images/Logotipo Design.png')}
             style={[styles.logoImage, { width: isExpanded ? '100%' : 40, height: isExpanded ? 60 : 40 }]}
             resizeMode="contain"
           />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <ScrollView 
@@ -218,20 +249,42 @@ export default function Sidebar2({
                   {item.subItems.map((subItem, subIndex) => (
                     <HoverableView
                       key={subIndex}
-                      style={styles.subMenuItem}
+                      style={[
+                        styles.subMenuItem,
+                        subItem.route === currentPath ? {
+                          backgroundColor: COLORS[currentTheme].primary + '10',
+                        } : {}
+                      ]}
+                      isActive={subItem.route === currentPath}
+                      activeBackgroundColor="transparent"
+                      onPress={() => handleSubItemPress(subItem.route)}
                       hoverTranslateX={4}
-                      activeBackgroundColor={COLORS[currentTheme].hover}
                     >
                       <View style={[
                         styles.dot,
-                        { backgroundColor: COLORS[currentTheme].primaryText }
+                        { 
+                          backgroundColor: subItem.route === currentPath 
+                            ? COLORS[currentTheme].primary 
+                            : COLORS[currentTheme].primaryText 
+                        }
                       ]} />
                       <Text style={[
                         styles.subMenuText,
-                        { color: COLORS[currentTheme].primaryText }
+                        { 
+                          color: subItem.route === currentPath 
+                            ? COLORS[currentTheme].primary 
+                            : COLORS[currentTheme].primaryText,
+                          fontWeight: subItem.route === currentPath ? '600' : '400'
+                        }
                       ]}>
-                        {subItem}
+                        {subItem.title}
                       </Text>
+                      {subItem.route === currentPath && (
+                        <View style={[
+                          styles.activeIndicator,
+                          { backgroundColor: COLORS[currentTheme].primary }
+                        ]} />
+                      )}
                     </HoverableView>
                   ))}
                 </View>
@@ -286,11 +339,9 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     borderBottomWidth: 1,
     backgroundColor: 'transparent',
-    ...(Platform.OS === 'web' ? {
-      position: 'sticky',
-      top: 0,
-      zIndex: 1,
-    } : {}),
+    position: 'sticky',
+    top: 0,
+    zIndex: 1,
   },
   logoContainer: {
     alignItems: 'center',
@@ -371,11 +422,6 @@ const styles = StyleSheet.create({
   },
   arrowContainer: {
     transform: [{ rotate: '0deg' }],
-    ...(Platform.OS === 'web' ? {
-      style: {
-        transition: 'transform 0.2s ease',
-      } as any,
-    } : {}),
   },
   arrowContainerRotated: {
     transform: [{ rotate: '180deg' }],
@@ -391,6 +437,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.sm,
     borderRadius: BORDER_RADIUS.lg,
     marginBottom: 2,
+    position: 'relative',
+    overflow: 'hidden',
   },
   dot: {
     width: 6,
@@ -401,6 +449,7 @@ const styles = StyleSheet.create({
   },
   subMenuText: {
     fontSize: 14,
+    flex: 1,
   },
   footerContainer: {
     borderTopWidth: 1,

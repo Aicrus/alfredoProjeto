@@ -559,7 +559,7 @@ export default function ConfigScreen() {
                             style={styles.configCell}
                             onPress={(e) => handleConfigClick(e, pessoa)}
                           >
-                            <ThemedText style={styles.configText}>•••</ThemedText>
+                            <Feather name="more-vertical" size={16} color={COLORS[currentTheme].secondaryText} />
                           </TouchableOpacity>
                         </ThemedView>
                       ))

@@ -87,15 +87,31 @@ export function Header({
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=${userAvatarColor}&color=6A7280`;
 
   const getPageTitle = (path?: string) => {
-    switch (path) {
-      case '/config':
+    if (!path) return 'Home';
+
+    // Remove a barra inicial se existir
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+
+    switch (cleanPath) {
+      case 'config':
         return 'Configurações';
-      case '/design-system':
+      case 'design-system':
         return 'Design System';
-      case '/home':
+      case 'home':
         return 'Home';
+      case 'prefeito':
+      case 'prefeitos':
+        return 'Prefeitos';
+      case '+not-found':
+      case 'not-found':
+        return 'Página não encontrada';
       default:
-        return 'Home';
+        // Transforma path com hífen em palavras capitalizadas
+        // Exemplo: 'minha-pagina' -> 'Minha Página'
+        return cleanPath
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ') || 'Home';
     }
   };
 

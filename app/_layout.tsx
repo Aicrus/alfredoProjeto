@@ -119,6 +119,7 @@ function RootLayoutNav() {
               gestureEnabled: false
             }}
           />
+          <Stack.Screen name="prefeito" />
           <Stack.Screen name="+not-found" />
         </Stack>
       </ThemedView>

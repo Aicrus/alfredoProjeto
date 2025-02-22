@@ -1,4 +1,4 @@
-import { StyleSheet, Platform, ScrollView, Animated, useWindowDimensions, Easing } from 'react-native';
+import { StyleSheet, Platform, ScrollView, Animated, useWindowDimensions, Easing, View, Image, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useState, useRef, useEffect } from 'react';
 
@@ -77,8 +77,26 @@ export default function HomeScreen() {
             }
           ]}>
             <PageContainer>
-              <ThemedView style={[styles.loremContainer, { backgroundColor: COLORS[currentTheme].secondaryBackground }]}>
-                {/* Conteúdo da página será adicionado aqui */}
+              <ThemedView style={[styles.loremContainer, { 
+                backgroundColor: COLORS[currentTheme].secondaryBackground,
+                flex: 1,
+                justifyContent: 'center'
+              }]}>
+                <View style={styles.imageContainer}>
+                  <Image 
+                    source={require('@/assets/images/gov-ms.png')}
+                    style={styles.governmentImage}
+                    resizeMode="contain"
+                  />
+                  <View style={styles.textContainer}>
+                    <Text style={[styles.mainTitle, { color: COLORS[currentTheme].primaryText }]}>
+                      Plataforma de Gestão Política
+                    </Text>
+                    <Text style={[styles.subtitle, { color: COLORS[currentTheme].primaryText }]}>
+                      Central de informações estratégicas para a equipe de gestão
+                    </Text>
+                  </View>
+                </View>
               </ThemedView>
             </PageContainer>
           </ThemedView>
@@ -117,8 +135,36 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
+    minHeight: '100%',
+  },
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  governmentImage: {
+    width: '100%',
+    height: 200,
+    maxWidth: 800,
+  },
+  textContainer: {
+    alignItems: 'center',
+    marginTop: SPACING.xxl,
+  },
+  mainTitle: {
+    fontSize: 48,
+    fontWeight: '500',
+    textAlign: 'center',
+    marginBottom: SPACING.xl,
+  },
+  subtitle: {
+    fontSize: 32,
+    fontWeight: '400',
+    textAlign: 'center',
+    opacity: 0.9,
   },
   loremContainer: {
     gap: SPACING.lg,
+    minHeight: '100%',
   },
 }); 

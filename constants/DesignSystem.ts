@@ -11,7 +11,7 @@ export const BREAKPOINTS = {
 export const COLORS = {
   light: {
     // Brand Colors - Cores principais da marca
-    primary: '#4A6FA5',    // Azul sofisticado
+    primary: '#10509C',    // Azul sofisticado
     secondary: '#22D3EE',  // Azul claro moderno
     tertiary: '#D3545D',   // Vermelho refinado
     alternate: '#E0E3E7',  // Cinza suave e elegante
@@ -20,7 +20,7 @@ export const COLORS = {
     primaryText: '#14181B',    // Cinza escuro para boa legibilidade
     secondaryText: '#57636C',  // Cinza médio suave
     primaryBackground: '#FFFFFF',   // Branco puro
-    secondaryBackground: '#F1F4F8', // Cinza claro para fundo
+    secondaryBackground: '#F7F9FC', // Cinza claro para fundo
 
     // System Colors - Cores do sistema
     icon: '#57636C',           // Cinza neutro
@@ -43,7 +43,7 @@ export const COLORS = {
   },
   dark: {
     // Brand Colors - Cores principais da marca no tema escuro
-    primary: '#4A6FA5',    // Azul sofisticado
+    primary: '#10509C',    // Azul sofisticado
     secondary: '#22D3EE',  // Azul claro moderno
     tertiary: '#D3545D',   // Vermelho refinado
     alternate: '#2E3A48',  // Cinza escuro clássico
@@ -51,8 +51,8 @@ export const COLORS = {
     // Utility Colors - Cores utilitárias adaptadas para o tema escuro
     primaryText: '#FFFFFF',    // Branco puro
     secondaryText: '#95A1AC',  // Cinza claro para legibilidade
-    primaryBackground: '#14181B',   // Cinza quase preto
-    secondaryBackground: '#1D2428', // Cinza bem escuro, não preto puro
+    primaryBackground: '#0F1417',   // Cinza quase preto
+    secondaryBackground: '#21262D', // Cinza bem escuro, não preto puro
 
     // System Colors - Cores do sistema adaptadas para o tema escuro
     icon: '#95A1AC',           // Cinza neutro
