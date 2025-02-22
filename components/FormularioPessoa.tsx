@@ -52,6 +52,14 @@ const GENEROS: Item[] = [
   { label: 'Prefiro não informar', value: 'nao_informado' },
 ];
 
+const LIDERANCAS: Item[] = [
+  { label: 'Coordenador Regional', value: 'coordenador_regional' },
+  { label: 'Coordenador Municipal', value: 'coordenador_municipal' },
+  { label: 'Coordenador de Zona', value: 'coordenador_zona' },
+  { label: 'Líder de Bairro', value: 'lider_bairro' },
+  { label: 'Líder Comunitário', value: 'lider_comunitario' },
+];
+
 const ESTADOS_CIVIS: Item[] = [
   { label: 'Solteiro(a)', value: 'solteiro' },
   { label: 'Casado(a)', value: 'casado' },
@@ -323,26 +331,12 @@ export function FormularioPessoa({ onCancel, onSave }: FormularioPessoaProps) {
         {dadosPessoais.ehLideranca && (
           <ThemedView style={styles.inputContainer}>
             <ThemedText style={styles.label}>Ligação com liderança</ThemedText>
-            <Select
-              selectedValue={dadosPessoais.ligacaoLideranca}
-              onValueChange={(value: string) => setDadosPessoais({ ...dadosPessoais, ligacaoLideranca: value })}
-            >
-              <SelectTrigger>
-                <SelectInput placeholder="Selecione uma liderança" />
-                <SelectIcon>
-                  <ChevronDownIcon />
-                </SelectIcon>
-              </SelectTrigger>
-              <SelectPortal>
-                <SelectBackdrop />
-                <SelectContent>
-                  <SelectDragIndicatorWrapper>
-                    <SelectDragIndicator />
-                  </SelectDragIndicatorWrapper>
-                  {/* Aqui virão as lideranças do banco de dados */}
-                </SelectContent>
-              </SelectPortal>
-            </Select>
+            <GluestackSelect
+              items={LIDERANCAS}
+              value={dadosPessoais.ligacaoLideranca}
+              onValueChange={(value) => setDadosPessoais({ ...dadosPessoais, ligacaoLideranca: value.toString() })}
+              placeholder="Selecione uma liderança"
+            />
           </ThemedView>
         )}
 
